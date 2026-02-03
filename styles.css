@@ -130,7 +130,7 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(rgba(46, 92, 110, 0.7), rgba(26, 58, 71, 0.8)), url('img/dancer.jpeg');
+    background: linear-gradient(rgba(46, 92, 110, 0.7), rgba(26, 58, 71, 0.8)), url('img/our\ mission.jpeg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -267,6 +267,20 @@ section h2::after {
 
 .about-image {
     text-align: center;
+}
+
+.about-image img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.about-image img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .placeholder-image {
@@ -584,6 +598,65 @@ section h2::after {
     text-align: center;
 }
 
+/* Gallery Slider */
+.gallery-slider {
+    position: relative;
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slider-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.slider-image.active {
+    opacity: 1;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Ensure slider works with existing gallery hover effects */
+.gallery-slider:hover .slider-image.active {
+    transform: scale(1.1);
+}
+
 /* Blog Section */
 .blog {
     background: var(--light-bg);
@@ -642,6 +715,159 @@ section h2::after {
 
 .read-more:hover {
     margin-left: 25px;
+}
+
+/* Donations Section */
+.donations {
+    background: var(--light-bg);
+    padding: 80px 0;
+}
+
+.donations-subtitle {
+    text-align: center;
+    color: var(--light-text);
+    margin-bottom: 50px;
+    font-size: 1.2rem;
+}
+
+.donations-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.donation-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.donation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.card-header i {
+    font-size: 2rem;
+    color: var(--secondary-color);
+}
+
+.card-header h3 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.card-content ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card-content ul li {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-content ul li i {
+    color: var(--success-color);
+    font-size: 0.9rem;
+}
+
+.bank-info {
+    margin-bottom: 25px;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.label {
+    font-weight: 600;
+    color: var(--dark-text);
+}
+
+.value {
+    color: var(--light-text);
+    font-family: 'Courier New', monospace;
+}
+
+.account-number {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.donation-note {
+    background: rgba(46, 92, 110, 0.05);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.donation-note p {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.donation-note p:last-child {
+    margin-bottom: 0;
+}
+
+.donation-note i {
+    color: var(--primary-color);
+}
+
+.donation-note a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.donation-note a:hover {
+    text-decoration: underline;
+}
+
+.impact-message {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.impact-message h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.impact-message p {
+    color: var(--light-text);
+    line-height: 1.8;
+    font-size: 1.1rem;
 }
 
 /* Contact Section */
@@ -882,7 +1108,8 @@ section h2::after {
     }
 
     .about-content,
-    .contact-content {
+    .contact-content,
+    .donations-content {
         grid-template-columns: 1fr;
     }
 
@@ -893,6 +1120,24 @@ section h2::after {
     .objectives-grid,
     .impact-grid {
         grid-template-columns: 1fr;
+    }
+
+    .donations {
+        padding: 60px 0;
+    }
+
+    .donation-card {
+        padding: 25px;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .value {
+        font-size: 0.9rem;
     }
 }
 

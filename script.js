@@ -168,5 +168,77 @@ backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+// Gallery Slider Functionality
+class GallerySlider {
+    constructor(sliderElement) {
+        this.sliderElement = sliderElement;
+        this.currentSlide = 0;
+        this.slides = sliderElement.querySelectorAll('.slider-image');
+        this.dots = sliderElement.querySelectorAll('.dot');
+        this.totalSlides = this.slides.length;
+        
+        if (this.slides.length > 0) {
+            this.init();
+        }
+    }
+
+    init() {
+        // Auto-rotate every 4 seconds
+        this.autoRotate = setInterval(() => {
+            this.nextSlide();
+        }, 4000);
+
+        // Add click listeners to dots
+        this.dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                this.goToSlide(index);
+                // Reset auto-rotate timer
+                clearInterval(this.autoRotate);
+                this.autoRotate = setInterval(() => {
+                    this.nextSlide();
+                }, 4000);
+            });
+        });
+
+        // Pause auto-rotate on hover
+        if (this.sliderElement) {
+            this.sliderElement.addEventListener('mouseenter', () => {
+                clearInterval(this.autoRotate);
+            });
+
+            this.sliderElement.addEventListener('mouseleave', () => {
+                this.autoRotate = setInterval(() => {
+                    this.nextSlide();
+                }, 4000);
+            });
+        }
+    }
+
+    goToSlide(slideIndex) {
+        // Remove active class from all slides and dots
+        this.slides.forEach(slide => slide.classList.remove('active'));
+        this.dots.forEach(dot => dot.classList.remove('active'));
+
+        // Add active class to current slide and dot
+        this.slides[slideIndex].classList.add('active');
+        this.dots[slideIndex].classList.add('active');
+
+        this.currentSlide = slideIndex;
+    }
+
+    nextSlide() {
+        this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+        this.goToSlide(this.currentSlide);
+    }
+}
+
+// Initialize all sliders when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const sliders = document.querySelectorAll('.gallery-slider');
+    sliders.forEach(slider => {
+        new GallerySlider(slider);
+    });
+});
+
 // Initialize
 console.log('Pheliridge website loaded successfully!');
